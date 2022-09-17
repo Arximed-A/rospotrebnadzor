@@ -11,7 +11,7 @@
 			class="form__field" 
 			v-bind:class="{error: error}"
 			@click="chosenTime"
-			v-model="time" 
+			v-model.trim="time" 
 		>
 			<option 
 				v-for="item of items"
@@ -42,7 +42,13 @@ export default {
 		}
 	},
 	methods: {
-		
+		chosenTime() {
+			const rule = /^[0-9]/;
+			const result = rule.test(String(this.time).toLowerCase());
+			if (result) {
+				this.pleaseSetTime(this.time);
+			}
+		},
 		...mapActions({
 			pleaseSetTime: 'pleaseSetTime',
 			pleaseShowTimeError: 'pleaseShowTimeError',
@@ -52,13 +58,7 @@ export default {
 		...mapState( {
 			error: state => state.timeError,
 		}),
-		chosenTime() {
-			const rule = /^[0-9]/;
-			const result = rule.test(String(this.time).toLowerCase());
-			if (result) {
-				this.pleaseSetTime(this.time);
-			} 
-		},
+		
 	},
 	created(){
 		this.items = data;

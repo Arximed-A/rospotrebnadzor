@@ -1,7 +1,9 @@
 <template>
   <h1 class="form__title">Заполните анкету</h1>
   <form action="#" class="form__container">
-    <NameItem/>
+    <NameItem
+			
+		/>
     <AgeItem/>
 		<EmailItem/>
 		<Data-item/>
@@ -46,14 +48,43 @@ export default {
 		}),
 		checkForm(){
 			this.pleaseCheckForm();
-			if (this.form){
+			if (this.validForm){
 				this.$router.push('/result');
 			}
+		},
+		transformWord(str) {
+			let ru = {
+				'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+				'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
+				'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+				'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+				'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+				'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya',
+				'ъ': 'ie', 'ь': '', 'й': 'i'
+			};
+			let newString = [];
+
+			return [...str].map(l => {
+				let latL = ru[l.toLocaleLowerCase()];
+
+				if (l !== l.toLocaleLowerCase()) {
+					latL = latL.charAt(0).toLocaleUpperCase() + latL.slice(1);
+				} else if (latL === undefined) {
+					latL = l;
+				}
+
+				return latL;
+			}).join('');
 		}
   },
+	created(){
+		const name = 'москва';
+		const text = this.transformWord(name);
+		
+	},
   computed:{
 		...mapState({
-			form: state=> state.form
+			validForm: state => state.validForm
 		})
   },
 }

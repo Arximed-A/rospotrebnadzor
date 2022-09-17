@@ -65,6 +65,7 @@ export default {
 			pleaseShowAdressError: 'pleaseShowAdressError',
 		}),
 		async checkCity(adress){
+			
 			const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 			const token = "d3ad8ae62a7f264b0be02696b72d549b2ed31f38";
 			let query = adress;
@@ -80,11 +81,16 @@ export default {
 			}
 
 			this.showList = true;
-
-			this.items = await fetch(url, options).then(res => {
-				return res.json()}).then(data => {
-					return data.suggestions;
+			try{
+				this.items = await fetch(url, options).then(res => {
+				return res.json()
+				}).then(data => {
+				return data.suggestions;
 				})
+			}
+			catch(err){
+				throw err;
+			}
 		}
 	},
 	computed: {

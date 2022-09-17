@@ -36,9 +36,11 @@ export default {
 	methods: {
 		checkName(name) {
 			const rule = /^[а-яА-ЯёЁa-zA-Z]+\s+[а-яА-ЯёЁa-zA-Z]/;
-			const result = rule.test(String(name));
+			// const result = rule.test(String(name));
+			const result = true;
+
 			if (result) {
-				this.pleaseSetName(this.name)
+				this.pleaseSetName(name)
 			} else {
 				this.pleaseShowNameError();
 			}
@@ -47,7 +49,9 @@ export default {
 		...mapActions({
 			pleaseSetName: 'pleaseSetName',
 			pleaseShowNameError: 'pleaseShowNameError',
-		})
+		}),
+
+		
 	},
 	computed: {
 		...mapState({
