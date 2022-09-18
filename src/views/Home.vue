@@ -1,23 +1,27 @@
 <template>
   <h1 class="form__title">Заполните анкету</h1>
-  <form action="#" class="form__container">
-    <NameItem
-			
-		/>
+  <form 
+    action="#" 
+    class="form__container" 
+    v-on:submit.prevent="onSubmit"
+  >
+    <NameItem/>
     <AgeItem/>
-		<EmailItem/>
-		<Data-item/>
-		<AdressItem/>
-		<TimeItem/>
+    <EmailItem/>
+    <Data-item/>
+    <AdressItem/>
+    <TimeItem/>
+    <button 
+      class="button"
+      @click="checkForm"
+    >
+      Записаться
+    </button>
   </form>
-    <button @click="checkForm">
-			Записаться
-		</button>
-  
-	
 </template>
 
 <script>
+
 import NameItem from "@/components/nameItem.vue";
 import AgeItem from "@/components/ageItem.vue";
 import EmailItem from "@/components/emailItem.vue";
@@ -27,7 +31,6 @@ import TimeItem from "@/components/timeItem.vue";
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  
   name: 'Home',
   components: {
     NameItem,
@@ -35,94 +38,83 @@ export default {
     EmailItem,
     DataItem,
     AdressItem,
-    TimeItem
+    TimeItem,
 },
   data(){
     return{
-			
     }
   },
   methods:{
-		...mapActions({
-			pleaseCheckForm: 'pleaseCheckForm',
-		}),
-		checkForm(){
-			this.pleaseCheckForm();
-			if (this.validForm){
-				this.$router.push('/result');
-			}
-		},
-		transformWord(str) {
-			let ru = {
-				'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
-				'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
-				'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
-				'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
-				'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
-				'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya',
-				'ъ': 'ie', 'ь': '', 'й': 'i'
-			};
-			let newString = [];
-
-			return [...str].map(l => {
-				let latL = ru[l.toLocaleLowerCase()];
-
-				if (l !== l.toLocaleLowerCase()) {
-					latL = latL.charAt(0).toLocaleUpperCase() + latL.slice(1);
-				} else if (latL === undefined) {
-					latL = l;
-				}
-
-				return latL;
-			}).join('');
-		}
+    ...mapActions({
+      pleaseCheckForm: 'pleaseCheckForm',
+    }),
+    checkForm(){
+      this.pleaseCheckForm();
+      if (this.validForm){
+        this.$router.push('/result');
+      };
+    },
   },
-	created(){
-		const name = 'москва';
-		const text = this.transformWord(name);
-		
-	},
   computed:{
-		...mapState({
-			validForm: state => state.validForm
-		})
+    ...mapState({
+      validForm: state => state.validForm
+    }),
   },
 }
+
 </script>
 
 <style lang="scss">
 .form{
-	&__title{
-	font-size: 30px;
-	}
-	&__item {
-		display: flex;
-		align-items: center;
-		margin: 0px 0px 20px 0px;
-		height: 30px;
-	}
-	&__text {
-		flex: 0 0 160px;
-		margin: 0px 10px 0px 0px;
-	}
-	&__field {
-		flex: 0 0 400px;
-		margin: 0px 10px 0px 0px;
-		padding: 0px 10px;
-		display: flex;
-		align-items: center;
-		
-	}
-	&__field,input{
-		height: 100%;
-	}
-	&__error {
-		flex: 0 0 100px;
-		color: red;
-		font-weight: 700;
-	}
+  &__title{
+  font-size: 30px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 20px 0px;
+    height: 30px;
+  }
+  &__text {
+    flex: 0 0 160px;
+    margin: 0px 10px 0px 0px;
+  }
+  &__field {
+    flex: 0 0 400px;
+    margin: 0px 10px 0px 0px;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    
+  }
+  &__field,input{
+    height: 100%;
+  }
+  &__error {
+    flex: 0 0 100px;
+    color: red;
+    font-weight: 700;
+  }
+}
+.necessarily{
+  color: red;
+  font-size: 25px;
 }
 .error{
-		border: 1px solid red;
+    border: 1px solid red;
+}
+
+.button{
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  &:hover{
+    background-color: rgba(21, 128, 0, 0.1);
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  }
 }
 </style>
