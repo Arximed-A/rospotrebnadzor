@@ -56,12 +56,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetTime: 'pleaseSetTime',
-      pleaseShowTimeError: 'pleaseShowTimeError',
+      pleaseSetTime: 'timeItem/pleaseSetTime',
+      pleaseShowTimeError: 'timeItem/pleaseShowTimeError',
     }),
   },
   computed: {
-    ...mapState( {
+    ...mapState( 'timeItem',{
       error: state => state.timeError,
       timeData: state => state.timeData,
     }),

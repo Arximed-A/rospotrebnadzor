@@ -44,6 +44,7 @@ export default {
     checkData(date) {
       const selectedDate = new Date(date); //преобразует выбранную пользователем дату в формат для сравнения
       const now = this.today.toLocaleDateString() === selectedDate.toLocaleDateString() ? true : false;
+			console.log(selectedDate.toLocaleDateString());
       // объект сегодня сосздаётся с текущим временем, поэтому 
       if (now || this.today < selectedDate && selectedDate < this.nextMonth){ // сравнение дат
         this.pleaseSetDate(selectedDate.toLocaleDateString());//устанавливает прошедшее проверку значение
@@ -51,13 +52,14 @@ export default {
         this.pleaseShowDateError();//вызывает ошибку
       };
     },
+		
     ...mapActions({
-      pleaseSetDate: 'pleaseSetDate',
-      pleaseShowDateError: 'pleaseShowDateError',
+      pleaseSetDate: 'dataItem/pleaseSetDate',
+      pleaseShowDateError: 'dataItem/pleaseShowDateError',
     })
   },
   computed: {
-    ...mapState({
+    ...mapState('dataItem',{
       error: state => state.dateError,
     }),
   },

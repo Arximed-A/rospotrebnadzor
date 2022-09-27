@@ -90,12 +90,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetAdress: 'pleaseSetAdress',
-      pleaseShowAdressError: 'pleaseShowAdressError',
+      pleaseSetAdress: 'adressItem/pleaseSetAdress',
+      pleaseShowAdressError: 'adressItem/pleaseShowAdressError',
     }),
   },
   computed: {
-    ...mapState( {
+    ...mapState( 'adressItem',{
       error: state => state.adressError,
     }),
   },

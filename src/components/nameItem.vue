@@ -49,12 +49,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetName: 'pleaseSetName',
-      pleaseShowNameError: 'pleaseShowNameError',
+      pleaseSetName: 'nameItem/pleaseSetName',
+      pleaseShowNameError: 'nameItem/pleaseShowNameError',
     }),
   },
   computed: {
-    ...mapState({
+    ...mapState('nameItem',{
       error: state => state.nameError,
     })
   },

@@ -48,12 +48,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetAge: 'pleaseSetAge',
-      pleaseShowAgeError: 'pleaseShowAgeError',
+      pleaseSetAge: 'ageItem/pleaseSetAge',
+      pleaseShowAgeError: 'ageItem/pleaseShowAgeError',
     }),
   },
   computed: {
-    ...mapState({
+    ...mapState('ageItem',{
       error: state => state.ageError,
     }),
   },
