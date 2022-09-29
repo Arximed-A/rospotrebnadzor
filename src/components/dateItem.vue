@@ -15,7 +15,7 @@
       id="date" 
       type="date" 
       v-model.trim="date" 
-      @change="checkData(date)"
+      @change="checkDate(date)"
     >
     <span 
       class="form__error" 
@@ -31,7 +31,7 @@
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'data-item',
+  name: 'date-item',
   data() {
     return {
       date: null,
@@ -41,7 +41,7 @@ export default {
     };
   },
   methods: {
-    checkData(date) {
+    checkDate(date) {
       const selectedDate = new Date(date); //преобразует выбранную пользователем дату в формат для сравнения
       const now = this.today.toLocaleDateString() === selectedDate.toLocaleDateString() ? true : false;
       // объект сегодня сосздаётся с текущим временем, поэтому 
@@ -52,12 +52,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetDate: 'pleaseSetDate',
-      pleaseShowDateError: 'pleaseShowDateError',
+      pleaseSetDate: 'dateItem/pleaseSetDate',
+      pleaseShowDateError: 'dateItem/pleaseShowDateError',
     })
   },
   computed: {
-    ...mapState({
+    ...mapState('dateItem',{
       error: state => state.dateError,
     }),
   },

@@ -50,12 +50,12 @@ export default {
       };
     },
     ...mapActions({
-      pleaseSetEmail: 'pleaseSetEmail',
-      pleaseShowEmailError: 'pleaseShowEmailError',
+      pleaseSetEmail: 'emailItem/pleaseSetEmail',
+      pleaseShowEmailError: 'emailItem/pleaseShowEmailError',
     }),
   },
   computed: {
-    ...mapState( {
+    ...mapState( 'emailItem',{
       error: state => state.emailError,
     }),
   },
