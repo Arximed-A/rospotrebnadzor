@@ -16,11 +16,11 @@ export default {
   },
   actions: {
     pleaseSetDate({ commit }, date) {
-      this.dispatch("changeValidData", true);
+      this.dispatch("changeValidDate", true);
       commit("setDate", date);
     },
     pleaseShowDateError({ commit }) {
-      this.dispatch("changeValidData", false);
+      this.dispatch("changeValidDate", false);
       commit("dateError");
     },
   },

@@ -62,14 +62,19 @@ import { mapState } from 'vuex'
 export default {
   name: 'Result',
   computed:{
-    ...mapState({
-      name: state => state.name,
-      age: state => state.age,
-      email: state => state.email,
-      date: state => state.date,
-      adress: state => state.adress,
-      time: state => state.time,
-    }),
+    ...mapState('nameItem', { name: state => state.name, }),
+		...mapState('ageItem', { age: state => state.age, }),
+		...mapState('emailItem', { email: state => state.email, }),
+		...mapState('dateItem', { date: state => state.date, }),
+		...mapState('adressItem', { adress: state => state.adress, }),
+		...mapState('timeItem', { time: state => state.time, }),
+			
+      
+      // email: state => state.email,
+      // date: state => state.date,
+      // adress: state => state.adress,
+      // time: state => state.time,
+    
   },
 }
 </script>

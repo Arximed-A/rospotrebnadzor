@@ -15,7 +15,7 @@
       id="date" 
       type="date" 
       v-model.trim="date" 
-      @change="checkData(date)"
+      @change="checkDate(date)"
     >
     <span 
       class="form__error" 
@@ -31,7 +31,7 @@
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'data-item',
+  name: 'date-item',
   data() {
     return {
       date: null,
@@ -41,10 +41,9 @@ export default {
     };
   },
   methods: {
-    checkData(date) {
+    checkDate(date) {
       const selectedDate = new Date(date); //преобразует выбранную пользователем дату в формат для сравнения
       const now = this.today.toLocaleDateString() === selectedDate.toLocaleDateString() ? true : false;
-			console.log(selectedDate.toLocaleDateString());
       // объект сегодня сосздаётся с текущим временем, поэтому 
       if (now || this.today < selectedDate && selectedDate < this.nextMonth){ // сравнение дат
         this.pleaseSetDate(selectedDate.toLocaleDateString());//устанавливает прошедшее проверку значение
@@ -52,14 +51,13 @@ export default {
         this.pleaseShowDateError();//вызывает ошибку
       };
     },
-		
     ...mapActions({
-      pleaseSetDate: 'dataItem/pleaseSetDate',
-      pleaseShowDateError: 'dataItem/pleaseShowDateError',
+      pleaseSetDate: 'dateItem/pleaseSetDate',
+      pleaseShowDateError: 'dateItem/pleaseShowDateError',
     })
   },
   computed: {
-    ...mapState('dataItem',{
+    ...mapState('dateItem',{
       error: state => state.dateError,
     }),
   },

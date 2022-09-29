@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 import nameItem from "./module/nameItem";
 import ageItem from "./module/ageItem";
 import emailItem from "./module/emailItem";
-import dataItem from "./module/dataItem";
+import dateItem from "./module/dateItem";
 import adressItem from "./module/adressItem";
 import timeItem from "./module/timeItem";
 
@@ -11,7 +11,7 @@ export default createStore({
     nameItem,
     ageItem,
     emailItem,
-    dataItem,
+    dateItem,
     adressItem,
     timeItem,
   },
@@ -19,13 +19,14 @@ export default createStore({
     name: false,
     age: false,
     email: false,
-    data: false,
+    date: false,
     time: false,
     validForm: false,
+    //сознательно задвоил данные по ошибки поля
   },
   mutations: {
-    validForm(state, valid) {
-      state.validForm = valid;
+    validForm(state) {
+      state.validForm = true;
     },
     validName(state, valid) {
       state.name = valid;
@@ -36,8 +37,8 @@ export default createStore({
     validEmail(state, valid) {
       state.email = valid;
     },
-    validData(state, valid) {
-      state.data = valid;
+    validDate(state, valid) {
+      state.date = valid;
     },
     validTime(state, valid) {
       state.time = valid;
@@ -53,8 +54,8 @@ export default createStore({
     changeValidEmail({ commit }, valid) {
       commit("validEmail", valid);
     },
-    changeValidData({ commit }, valid) {
-      commit("validData", valid);
+    changeValidDate({ commit }, valid) {
+      commit("validDate", valid);
     },
     changeValidTime({ commit }, valid) {
       commit("validTime", valid);
@@ -119,17 +120,21 @@ export default createStore({
         commit("emailItem/emailError");
       }
       if (!this.state.date) {
-        commit("dataItem/dateError");
+        commit("dateItem/dateError");
       }
       if (!this.state.time) {
         commit("timeItem/timeError");
       }
 
-      /*
-      if (state.name && state.age && state.email && state.date && state.time) {
+      if (
+        this.state.name &&
+        this.state.age &&
+        this.state.email &&
+        this.state.date &&
+        this.state.time
+      ) {
         commit("validForm");
       }
-			*/
     },
   },
 });

@@ -25,7 +25,7 @@
 import NameItem from "@/components/nameItem.vue";
 import AgeItem from "@/components/ageItem.vue";
 import EmailItem from "@/components/emailItem.vue";
-import DataItem from '@/components/dataItem.vue';
+import DataItem from '@/components/dateItem.vue';
 import AdressItem from "@/components/adressItem.vue";
 import TimeItem from "@/components/timeItem.vue";
 import { mapActions, mapState } from 'vuex';
